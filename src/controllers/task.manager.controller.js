@@ -44,7 +44,9 @@ function createTask(req, res) {
             title,
             description,
             priority,
-            status: false
+            status: false,
+            createdAt: new Date().toISOString(),
+            updateAt: new Date().toISOString()
         }
         tasks.push(task);
         writeTasksToFile(tasks);
@@ -74,9 +76,9 @@ function updateTask(req, res) {
         task.description = description || task.description;
         task.priority = priority || task.priority;
         task.status = status || task.status;
+        task.updateAt = new Date().toISOString();
 
         writeTasksToFile(tasks);
-
         return res.status(201).json({ status: "success", message: "Task Updated Successfully", data: task });
     } catch (error) {
         throw error;
