@@ -18,6 +18,8 @@
 - Filter and Sort API
 `
     GET /tasks?status=true: Returns completed tasks.
+
     GET /tasks?sortBy=creationDate: Returns tasks sorted by creation date.
+    
     GET /tasks?status=true&sortBy=creationDate: Returns completed tasks sorted by creation date.
 `
