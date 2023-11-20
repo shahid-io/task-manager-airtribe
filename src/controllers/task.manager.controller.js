@@ -36,15 +36,14 @@ function getTaskById(req, res) {
 /** post task */
 function createTask(req, res) {
     try {
-        const { title, description } = req.body;
-        if (!title || !description) {
-            return res.status(400).json({ message: "Title and description are required" });
-        }
+        const { title, description, priority } = req.body;
+
         const tasks = readTasksFromFile();
         const task = {
             id: tasks.length + 1,
             title,
             description,
+            priority,
             status: false
         }
         tasks.push(task);
@@ -59,7 +58,7 @@ function createTask(req, res) {
 function updateTask(req, res) {
     try {
         const { id } = req.params;
-        const { title, description, status } = req.body;
+        const { title, description, priority, status } = req.body;
 
         if (!id) {
             return res.status(400).json({ message: "Id is required" });
@@ -73,6 +72,7 @@ function updateTask(req, res) {
 
         task.title = title || task.title;
         task.description = description || task.description;
+        task.priority = priority || task.priority;
         task.status = status || task.status;
 
         writeTasksToFile(tasks);
@@ -102,4 +102,22 @@ function deleteTask(req, res) {
         throw error;
     }
 }
-module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask }
+
+/** get task by priority level */
+function getTaskByPriority(req, res) {
+    try {
+        const { level } = req.params;
+        if (!level) {
+            return res.status(400).json({ message: "Priority level is required" });
+        }
+        const tasks = readTasksFromFile();
+        const filteredTasks = tasks.filter(task => task.priority === level);
+        if (!filteredTasks.length) {
+            return res.status(404).json({ message: "No tasks found" });
+        }
+        return res.status(201).json({ status: "success", data: filteredTasks });
+    } catch (error) {
+        throw error;
+    }
+}
+module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask, getTaskByPriority }

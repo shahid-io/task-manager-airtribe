@@ -28,5 +28,12 @@
     "title": "Laundry",
     "description": "Need to do on Sunday",
     "status": false
+  },
+  {
+    "id": 6,
+    "title": "Laundry",
+    "description": "Need to do on Sunday",
+    "priority": "low",
+    "status": false
   }
 ]
