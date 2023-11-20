@@ -122,4 +122,26 @@ function getTaskByPriority(req, res) {
         throw error;
     }
 }
-module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask, getTaskByPriority }
+
+/** get filtered task */
+function getFilteredTask(req, res) {
+    try {
+        const { status, sortBy } = req.query;
+
+        let tasks = readTasksFromFile();
+
+        if (status !== undefined) {
+            tasks = tasks.filter(task => task.status === true);
+        }
+
+        if (sortBy === 'creationDate') {
+            tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        }
+
+        return res.status(200).json({ status: "success", "message": "Task Fetched Successfully", data: tasks });
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask, getTaskByPriority, getFilteredTask }

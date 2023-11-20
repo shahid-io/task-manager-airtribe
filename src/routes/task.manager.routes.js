@@ -9,6 +9,7 @@ router.post('/tasks', validateTask, tasksController.createTask);
 router.put('/tasks/:id', validateTask, tasksController.updateTask);
 router.delete('/tasks/:id', tasksController.deleteTask);
 router.get('/tasks/priority/:level', tasksController.getTaskByPriority);
+router.get('/tasks?level', tasksController.getFilteredTask);
 
 
 module.exports = router;
