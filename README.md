@@ -13,7 +13,9 @@
     DELETE /tasks/:id: Delete a task by its ID.
 `
 - API to fetch Task based on priority level
-    `GET /tasks/priority/:level.`
+`
+    GET /tasks/priority/:level:
+`
 
 - Filter and Sort API
 `
@@ -22,4 +24,9 @@
     GET /tasks?sortBy=creationDate: Returns tasks sorted by creation date.
     
     GET /tasks?status=true&sortBy=creationDate: Returns completed tasks sorted by creation date.
+`
+
+:adult:
+`
+author: shahid-io
 `
