@@ -1,5 +1,5 @@
 const tasks = require('../utils/task.manager');
-
+const { writeTasksToFile } = require('../helper/fs.operation');
 /** get all tasks */
 function getTasks(req, res) {
     try {
@@ -26,7 +26,25 @@ function getTaskById(req, res) {
     }
 }
 
+function createTask(req, res) {
+    try {
+        const { title, description } = req.body;
+        if (!title || !description) {
+            return res.status(400).json({ message: "Title and description are required" });
+        }
+        const task = {
+            id: tasks.length + 1,
+            title,
+            description,
+            status: false
+        }
+        tasks.push(task);
+        writeTasksToFile(tasks);
+        return res.status(201).json({ status: "success", data: task });
+    } catch (error) {
+        throw error;
+    }
+}
 
 
-
-module.exports = { getTasks, getTaskById }
+module.exports = { getTasks, getTaskById, createTask }
