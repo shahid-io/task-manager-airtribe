@@ -127,10 +127,8 @@ function getTaskByPriority(req, res) {
 function getFilteredTask(req, res) {
     try {
         const { status, sortBy } = req.query;
-        console.log('Status parameter:', status);
 
         let tasks = readTasksFromFile();
-        console.log('Read tasks from file:', tasks);
         
         if (status !== undefined) {
             tasks = tasks.filter(task => task.status === (status.toLowerCase() === 'true'));
