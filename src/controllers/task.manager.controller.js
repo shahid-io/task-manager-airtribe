@@ -25,7 +25,7 @@ function getTaskById(req, res) {
 
         const task = tasks.find(task => task.id === parseInt(id));
         if (!task) {
-            return res.status(404).json({ message: "Task not found" });
+            return res.status(404).json({ message: "Task not found---" });
         }
         return res.status(201).json({ status: "success", "message": "Task Fetched Successfully", data: task });
     } catch (error) {
@@ -127,11 +127,13 @@ function getTaskByPriority(req, res) {
 function getFilteredTask(req, res) {
     try {
         const { status, sortBy } = req.query;
+        console.log('Status parameter:', status);
 
         let tasks = readTasksFromFile();
-
+        console.log('Read tasks from file:', tasks);
+        
         if (status !== undefined) {
-            tasks = tasks.filter(task => task.status === true);
+            tasks = tasks.filter(task => task.status === (status.toLowerCase() === 'true'));
         }
 
         if (sortBy === 'creationDate') {
@@ -144,4 +146,24 @@ function getFilteredTask(req, res) {
         return res.status(500).json({ message: "Internal Server Error" });
     }
 }
-module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask, getTaskByPriority, getFilteredTask }
+
+/** change task status */
+function changeStatus(req, res) {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json({ message: "Id is required" });
+        }
+        const tasks = readTasksFromFile();
+        const task = tasks.find(task => task.id === parseInt(id));
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+        task.status = !task.status;
+        writeTasksToFile(tasks);
+        return res.status(201).json({ status: "success", message: "Task Status Updated Successfully", data: task });
+    } catch (error) {
+        throw error;
+    }
+}
+module.exports = { getTasks, getTaskById, createTask, updateTask, deleteTask, getTaskByPriority, getFilteredTask, changeStatus }
