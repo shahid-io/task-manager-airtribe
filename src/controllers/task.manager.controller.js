@@ -4,10 +4,22 @@ const { writeTasksToFile, readTasksFromFile } = require('../helper/fs.helper');
 /** get all tasks */
 function getTasks(req, res) {
     try {
-        const tasks = readTasksFromFile();
+        const { status, sortBy } = req.query;
+        console.log(req.query);
+        let tasks = readTasksFromFile();
+
         if (!tasks.length) {
             return res.status(404).json({ message: "No tasks found" });
         }
+
+        if (status !== undefined) {
+            tasks = tasks.filter(task => task.status === (status.toLowerCase() === 'true'));
+        }
+
+        if (sortBy === 'creationDate') {
+            tasks.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        }
+
         return res.status(201).json({ status: "success", data: tasks });
     } catch (error) {
         throw error;
@@ -129,7 +141,7 @@ function getFilteredTask(req, res) {
         const { status, sortBy } = req.query;
 
         let tasks = readTasksFromFile();
-        
+
         if (status !== undefined) {
             tasks = tasks.filter(task => task.status === (status.toLowerCase() === 'true'));
         }

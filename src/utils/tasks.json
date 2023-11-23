@@ -3,38 +3,50 @@
     "id": 1,
     "title": "Task 1",
     "description": "Description for Task 1",
-    "status": true
+    "status": true,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 2,
     "title": "Task 2",
     "description": "Description for Task 2",
-    "status": true
+    "status": true,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 3,
     "title": "Task 3",
     "description": "description for task 4",
-    "status": true
+    "status": true,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 5,
     "title": "Laundry",
     "description": "Need to do on Sunday",
-    "status": false
+    "status": false,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 6,
     "title": "Laundry",
     "description": "Need to do on Sunday",
-    "status": false
+    "status": false,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 6,
     "title": "Laundry",
     "description": "Need to do on Sunday",
     "priority": "low",
-    "status": false
+    "status": false,
+    "createdAt": "2023-11-20T18:02:13.708Z",
+    "updatedAt": "2023-11-20T18:02:52.953Z"
   },
   {
     "id": 7,
@@ -42,7 +54,7 @@
     "description": "Need to walk on Sunday morning",
     "priority": "high",
     "status": true,
-    "createdAt": "2023-11-20T18:02:13.708Z",
-    "updateAt": "2023-11-20T18:02:52.953Z"
+    "createdAt": "2022-11-20T18:02:13.708Z",
+    "updatedAt": "2022-11-20T18:02:52.953Z"
   }
 ]
